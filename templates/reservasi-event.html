@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- icon bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Animate style -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- cdn-jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+        <link rel="shortcut icon" href="../static/img/logo-nav.png" type="image">
+        <title>Sans Co Cafe & CoWorking Space</title>
+    <link rel="stylesheet" href="../static/reservasi-event.css">
+   
+    <script>
+        function booking() {
+            let nama = $('#nama').val();
+            let telepon = $('#telepon').val();
+            let komunitas = $('#komunitas').val();
+            let date = $('#date').val();
+            let time = $('#time').val();
+            let durasi = $('#durasi').val();
+            let jumlah = $('#jumlah').val();
+            let piliharea = $('#piliharea').val();
+            let pilihmenu = $('#pilihmenu').val();
+            let jammenu = $('#jammenu').val();
+            let dp = $('#dp').val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/event/post',
+                data: {
+                    nama_give: nama,
+                    telepon_give: telepon,
+                    komunitas_give: komunitas,
+                    date_give: date,
+                    time_give: time,
+                    durasi_give: durasi,
+                    jumlah_give: jumlah,
+                    piliharea_give: piliharea,
+                    pilihmenu_give: pilihmenu,
+                    jammenu_give: jammenu,
+                    dp_give: dp
+                },
+                success: function (response) {
+                    alert(response.msg)
+                    window.location.href = '/'
+                }
+            })
+
+        }
+    </script>
+</head>
+
+<body>
+    <!-- navbar -->
+    <nav
+        class="navbar navbar-expand-lg  navbar-dark bg-transparent position-fixed w-100 animate__animated animate__fadeInDown">
+        <div class="container">
+            <a class="navbar-brand" href="#"><img src="../static/img/logo-nav.png" alt=""></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item mx-2">
+                        <a class="nav-link " href="/">Home</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="/about">About us</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="/menu">Menu</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="/gallery">Gallery</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="/special-offers">Special offers</a>
+                    </li>
+
+                </ul>
+                <!-- reservation btn -->
+                <form class="d-flex">
+                    <button class="nav-item dropdown px-3 py-1 " style="border: 4px solid #ffffff; ">
+                        <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Reservation
+                        </a>
+                        <ul class="dropdown-menu mt-2">
+                            <li><a class="dropdown-item" href="/meeting">Meeting Room</a></li>
+                            <li><a class="dropdown-item" href="/event">Event</a></li>
+                        </ul>
+                        </li>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <section id="reservasi" class="pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center text-white" style="margin-top: 100px;">
+                    <h2>RESERVATION</h2>
+                    <span class="sub-title">Event</span>
+                    <!-- reservation-modal- btn -->
+                    <div class="modal-body flex-column flex-lg-row justify-content-center align-items-center gap-3"
+                        style="margin-top: 20px;">
+                        <button class="btn-here" style="border:none; border-radius: 10px; padding: 5px;" type="button"
+                            data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            RESERVATION HERE
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <p class="text-white text-center mt-4">Syarat & Ketentuan</p>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 " id="exampleModalLabel">Reservation Event</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body  ">
+                    <div class="form-group m-3">
+                        <label for="">Nama</label>
+                        <input type="text" name="Nama" placeholder="Nama" class="form-control" id="nama">
+                    </div>
+                    <div class="form-group m-3">
+                        <label for="">Telepon</label>
+                        <input type="number" placeholder="Nomer telepon" class="form-control" id="telepon">
+                    </div>
+                    <div class="form-group m-3">
+                        <label for="">Instansi/komunitas</label>
+                        <input type="text" placeholder="Instansi/komunitas" class="form-control" id="komunitas">
+                    </div>
+                    <div class="form-group m-3">
+                        <label for="">Tanggal</label>
+                        <input type="date" placeholder="Hari/Tanggal" class="form-control" id="date">
+                    </div>
+                    <div class="form-group m-3">
+                        <label for="">jam </label>
+                        <input type="time" placeholder="Jam" class="form-control" id="time">
+                    </div>
+                    <div class="form-group m-3">
+                        <label for="">Durasi</label>
+                        <input type="number" placeholder="Durasi" class="form-control" id="durasi">
+                    </div>
+                    <div class="form-group m-3">
+                        <label for="">jumlah orang</label>
+                        <input type="number" placeholder="jumlah orang" class="form-control" id="jumlah">
+                    </div>
+                    <div class="form-group m-3">
+                        <label for="">Area</label>
+                        <!-- <input type="text" placeholder="Area" class="form-control" id="durasi"> -->
+                    </div>
+                    <div class="form-group m-3">
+                        <select name="" class="form-control" id="piliharea" aria-label="select exampleModal"
+                            style="max-width: 100%; padding: 4px;">
+                            <option value="" hidden>Select the subject</option>
+                            <option disabled></option>
+                            <option>min 30 Orang : Event Space depan</option>
+                            <option>min 50 orang: Event Space Depan, Event Space Belakang</option>
+                            <option>min70 orang: Event Space Depan, Event Space Belakang, Amphiteater</option>
+                        </select>
+                    </div>
+                    <div class="form-group m-3">
+                        <label for="">Menu</label>
+                    </div>
+                    <div class="form-group m-3">
+                        <select class="form-control" id="pilihmenu" aria-label="select exampleModal">
+                            <option value="" hidden>Select the subject</option>
+                            <option disabled></option>
+                            <option>1. Paket A (45K)</option>
+                            <option>3. Paket B (45K)</option>
+                            <option>3. Paket Gold (40K)</option>
+                            <option>4. Paket Silver (35K)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group m-3">
+                        <label for="">jam keluar menu </label>
+                        <input type="time" placeholder="Jam keluar Menu" class="form-control" id="jammenu">
+                    </div>
+                    <div class="form-group m-3">
+
+                        <input type="text" placeholder="DP" class="form-control" id="dp">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn-here" onclick="booking()" style="border-radius:5px ;">BOOKING
+                        NOW</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-bg">
+        <div class="scroll-div">
+            <div class="scroll-object">
+                <h5>Biaya Sewa Tempat: </h5>
+                <li>Tidak ada biaya sewa, tetapi ada minimal order Rp 35.000 per orang.</li>
+                <li>Belum termasuk pajak 10%.</li>
+                <br>
+                <h5>Fasilitas:</h5>
+                <li>1 Mic</li>
+                <li>1 Projector (VGA/HDMI)</li>
+                <li>1 Screen</li>
+                <li>1 Kiup (amplifier Mini)</li>
+                <br>
+                <h5>Waktu:</h5>
+                <li>Durasi 3 Jam, lebih dari itu dikenakan biaya tambahan.</li>
+                <li>Persiapan acara maksimal 15 menit sebelumnya.</li>
+
+                <li>Contoh biaya tambahan untuk waktu tambahan.</li>
+
+                <br>
+                <h5>Area:</h5>
+                <li>Panggung minimal 30 orang: Event Space Depan</li>
+                <li> Panggung minimal 50 orang: Event Space Depan, Event Space Belakang</li>
+                <li> Panggung minimal 70 orang: Event Space Depan, Event Space Belakang, Amphiteater</li>
+                <br>
+                <h5>Menu:</h5>
+                <li>Berbagai paket makanan dengan harga berbeda.</li>
+                <li> Menu reguler maksimal 5 varian untuk jumlah di bawah 40 orang.</li>
+                <br>
+                <h5>Tambahan:</h5>
+                <li>Biaya service 5% untuk reservasi minimal 50 orang.</li>
+                <li> Protokol kesehatan harus diikuti.</li>
+                <li> Pembayaran uang muka 50% dari total bayar.</li>
+                <li> Pembatalan reservasi dikenakan biaya dan charge untuk membawa makanan/minuman dari luar.</li>
+                <br>
+
+                <strong>Pastikan memahami ketentuan di atas sebelum melakukan reservasi.</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- card-menu -->
+    <div class="container-fluid p-5 d-flex justify-content-center align-items-center ">
+        <div class="row">
+            <div class="col">
+
+                <div class="card mt-3" style="width: 18rem;">
+                    <img src="../static/img/img-admin/Rectangle 150.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h6>1. Paket Platinum A (45K) </h6>
+                        <p class="card-text">
+                            - Nasi Putih<br>
+                            - Beef Blackpepper <br>
+                            - Telur Ceplok<br>
+                            - Selada Timun<br>
+                            - Ice Lemon Tea<br>
+                            <br>
+                            <br>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col">
+
+                <div class="card mt-3" style="width: 18rem;">
+                    <img src="../static/img/img-admin/Rectangle 155.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h6>3. Paket Platinum B (45K)
+                        </h6>
+                        <p class="card-text">- Nasi Putih<br>
+                            - Ayam Bakar Madu<br>
+                            - Tahu Tempe<br>
+                            - Selada Timun<br>
+                            - Sambal Bawang<br>
+                            - Ice Lemon Tea<br>
+                            <br>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col">
+
+                <div class="card mt-3" style="width: 18rem;">
+                    <img src="../static/img/img-admin/Rectangle 152.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h6>3. Paket Gold (40K)
+                        </h6>
+                        <p class="card-text">- Nasi Putih<br>
+                            - Ayam Goreng Kremes<br>
+                            - Tahu Tempe<br>
+                            - Timun Selada<br>
+                            - Sambal Bawang<br>
+                            - Kerupuk<br>
+                            - Ice Lemon Tea<br>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col">
+
+                <div class="card mt-3" style="width: 18rem;">
+                    <img src="../static/img/img-admin/Rectangle 151.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h6> 4. Paket Silver (35K)
+                        </h6>
+                        <p class="card-text">- Nasi Putih<br>
+                            - Chicken Crispy Asam Manis<br>
+                            - Selada Timun<br>
+                            - Kerupuk<br>
+                            - Sweet Ice Tea<br>
+                            <br>
+                            <br>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- footer -->
+    <footer class="text-white pt-5 pb-4" style="background-color: #382D33;">
+        <div class="container text-center text-md-start">
+            <div class="row text-center text-md-start">
+                <!-- logo footer -->
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <img class="img-fluid" src="../static/img/logo-footer.png" alt="">
+                </div>
+                <!-- conten -->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-white">Content</h5>
+                    <p>
+                        <a href="/" class="text-white" style="text-decoration: none;"> Home</a>
+                    </p>
+
+                    <p>
+                        <a href="/about" class="text-white" style="text-decoration: none;"> About Us</a>
+                    </p>
+
+                    <p>
+                        <a href="/menu" class="text-white" style="text-decoration: none;"> Menu</a>
+                    </p>
+
+                    <p> <a href="/gallery" class="text-white" style="text-decoration: none;"> Gallery</a>
+                    </p>
+
+                </div>
+                <!-- contac -->
+                <div class="col-md-3 col-lg-2 col-md-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-white"> Contacts</h5>
+                    <p>
+                        <a href="#" class="text-white" style="text-decoration: none;"> 022-20458359</a>
+                    </p>
+
+                    <p>
+                        <a href="#" class="text-white" style="text-decoration: none;"> sanscoworking@gmail.com</a>
+                    </p>
+
+                    <p>
+                        <a href="https://instagram.com/sans.space?igshid=MmU2YjMzNjRlOQ=="> <i
+                                class="bi bi-instagram text-white"></i></a>
+                    </p>
+
+                </div>
+                <!-- open hour -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-white"> Opening Hours</h5>
+
+                    <p>
+                        <a href="#" class="text-white" style="text-decoration: none;"> Everyday 10.00 - 05.00</a>
+                    </p>
+                </div>
+            </div>
+
+
+            <hr class=" mt-4 mb-4">
+
+            <div class="row text-md-center">
+                <div class="col-md-12">
+                    <p>Copyrights ⓒ 2023 Sans Co Cafe & CoWorking Space</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="../static/js/scripts.js"></script>
+</body>
+
+</html>
